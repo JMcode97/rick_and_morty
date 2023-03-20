@@ -1,8 +1,6 @@
 import Card from './Card';
 
-export default function Cards({ characters }) {
-   const onClose = () => {window.alert('Emulamos que se cierra la card')}
-
+export default function Cards({ characters, onClose }) {
    return (
       <div>
          {
@@ -11,6 +9,7 @@ export default function Cards({ characters }) {
                   <>
                      <Card 
                      key={id}
+                     id={id}
                      name={name}
                      status={status}
                      species={species}
