@@ -15,12 +15,18 @@ export default function SearchBar({ onSearch }) {
          onChange={handleChange} 
          />
          <button 
-         onClick={() => {onSearch(id)}}
+         onClick={() => {
+            onSearch(id)
+            setId('')
+         }}
          >
          Agregar
          </button>
          <button
-         onClick={() => {onSearch(id, true)}}
+         onClick={() => {
+            onSearch(id, true)
+            setId('')
+         }}
          >
          Random
          </button>

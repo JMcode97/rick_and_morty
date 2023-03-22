@@ -13,7 +13,7 @@ function App() {
       let apiCall = true
 
       characters.forEach((character) => {
-         if(character.id == id) return apiCall = false
+         if(character.id === parseInt(id)) return apiCall = false
       })
 
       if(apiCall) {
@@ -23,14 +23,14 @@ function App() {
             } else {
                window.alert('¡No hay personajes con este ID!');
             }
-         });
+         })
+         .catch(error => window.alert('¡No hay personajes con este ID!'))
       }
       else alert(`El personaje con ID: ${id} ya esta agregado...`)
    }
 
    const onClose = (id) => {
-      parseInt(id)
-      let filteredCharacters = characters.filter((char) => char.id != id)
+      let filteredCharacters = characters.filter((char) => char.id !== parseInt(id))
       setCharacters(filteredCharacters)
    }
 
