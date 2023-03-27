@@ -7,9 +7,11 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import About from './views/About';
 import Detail from './components/Detail/Detail';
 import Form from './components/Form/Form';
+import Favorites from './components/Favorites/Favorites'
+import Error from './components/Error/Error'
 
 function App() {
-   // Usar metodo .find - setState((prev) => [...prev, data])
+   // Usar metodo .find
    const navigate = useNavigate()
    const [characters, setCharacters] = useState([])
    const [access, setAccess] = useState(false)
@@ -83,6 +85,18 @@ function App() {
             <Route 
             path='/detail/:id'
             element={<Detail />}
+            />
+            <Route 
+            path='/favorites'
+            element={<Favorites />}
+            />
+            <Route 
+            path='/detail/:id'
+            element={<Detail />}
+            />
+            <Route 
+            path='*'
+            element={<Error />}
             />
          </Routes>
       </div>

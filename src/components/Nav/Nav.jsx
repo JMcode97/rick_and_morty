@@ -27,6 +27,13 @@ export default function Nav({ onSearch }) {
                         Home
                         </button>
                         </Link>
+                        <Link
+                        to={'/favorites'}
+                        >
+                        <button>
+                        Favorites
+                        </button>
+                        </Link>
                     </>
                 ) : ('')
             }  
