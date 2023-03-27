@@ -2,7 +2,7 @@ import React from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import { Link, useLocation } from "react-router-dom";
 
-export default function Nav({ onSearch }) {
+export default function Nav({ onSearch, logout }) {
     const { pathname } = useLocation()
 
     return(
@@ -34,6 +34,10 @@ export default function Nav({ onSearch }) {
                         Favorites
                         </button>
                         </Link>
+                        <button
+                        onClick={logout}>
+                        Cerrar sesion
+                        </button>
                     </>
                 ) : ('')
             }  

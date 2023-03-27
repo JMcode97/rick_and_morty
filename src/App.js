@@ -26,6 +26,10 @@ function App() {
       }
    }
 
+   const logout = () => {
+      setAccess(false)
+   }
+
    const onSearch = (id, random) => {
       if(random) id = Math.floor(Math.random() * 827) + 1
       
@@ -61,6 +65,7 @@ function App() {
       <div className='App'>
          <Nav
          onSearch={onSearch}
+         logout={logout}
          />
          <Routes>
             <Route 
