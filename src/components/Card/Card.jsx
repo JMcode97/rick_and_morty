@@ -33,7 +33,12 @@ const Card = ({ id, name, status, species, gender, image, origin, onClose, addFa
                <button onClick={handleFavorite}>🤍</button>
             )
          }
-         <button onClick={() => onClose(id)}>X</button>
+         <button onClick={() => {
+           onClose(id)
+           removeFav(id) 
+         }}>
+         X
+         </button>
          <Link
          to={`/detail/${id}`}
          >
