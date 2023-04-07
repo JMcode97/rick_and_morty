@@ -1,5 +1,6 @@
 const http = require('http')
 const data = require('./utils/data')
+const getCharById = require('./controllers/getCharById')
 
 PORT = 3001
 
@@ -9,9 +10,7 @@ http.createServer((req, res) => {
 
     if(req.url.includes('/rickandmorty/character')) {
         paramsId = Number(req.url.split('/').pop())
-        let character = data.filter((char) => char.id === paramsId)[0]
-        res.end(JSON.stringify(character))
+        getCharById(res, paramsId)
     }
-
 })
 .listen(PORT, 'localhost')
