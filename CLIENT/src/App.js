@@ -11,19 +11,19 @@ import Favorites from './components/Favorites/Favorites'
 import Error from './components/Error/Error'
 
 function App() {
-   // Usar metodo .find
    const navigate = useNavigate()
    const [characters, setCharacters] = useState([])
    const [access, setAccess] = useState(false)
 
-   let EMAIL = 'admin@admin.com'
-   let PASSWORD = 'admin'
-
-   const login = (userData) => {
-      if (userData.password === PASSWORD && userData.email === EMAIL) {
-         setAccess(true);
-         navigate('/home');
-      }
+   function login(userData) {
+      const { email, password } = userData;
+      const URL = 'http://localhost:3001/rickandmorty/login/';
+      axios(URL + `?email=${email}&password=${password}`)
+      .then(({ data }) => {
+         const { access } = data;
+         setAccess(data);
+         access && navigate('/home');
+      });
    }
 
    const logout = () => {
@@ -53,7 +53,7 @@ function App() {
    }
 
    const onClose = (id) => {
-      let filteredCharacters = characters.filter((char) => char.id !== parseInt(id))
+      let filteredCharacters = characters.filter((char) => char.id !== id)
       setCharacters(filteredCharacters)
    }
 
