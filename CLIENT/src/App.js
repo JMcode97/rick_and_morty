@@ -15,41 +15,50 @@ function App() {
    const [characters, setCharacters] = useState([])
    const [access, setAccess] = useState(false)
 
-   function login(userData) {
-      const { email, password } = userData;
-      const URL = 'http://localhost:3001/rickandmorty/login/';
-      axios(URL + `?email=${email}&password=${password}`)
-      .then(({ data }) => {
-         const { access } = data;
-         setAccess(data);
-         access && navigate('/home');
-      });
+   const login = async (userData) => {
+      try {
+         const { email, password } = userData;
+         const URL = 'http://localhost:3001/rickandmorty/login/';
+         await axios(URL + `?email=${email}&password=${password}`)
+         .then(({ data }) => {
+            const { access } = data;
+            setAccess(data);
+            access && navigate('/home');
+         });
+         
+      } catch (error) {
+         console.log(error)
+      }
    }
 
    const logout = () => {
       setAccess(false)
    }
 
-   const onSearch = (id, random) => {
-      if(random) id = Math.floor(Math.random() * 827) + 1
+   const onSearch = async (id, random) => {
+      try {
+         if(random) id = Math.floor(Math.random() * 827) + 1
       
-      let apiCall = true
+         let apiCall = true
 
-      characters.forEach((character) => {
-         if(character.id === parseInt(id)) return apiCall = false
-      })
-
-      if(apiCall) {
-         axios(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => {
-            if (data.name) {
-               setCharacters((oldChars) => [...oldChars, data]);
-            } else {
-               window.alert('¡No hay personajes con este ID!');
-            }
+         characters.forEach((character) => {
+            if(character.id === parseInt(id)) return apiCall = false
          })
-         .catch(error => window.alert('¡No hay personajes con este ID!'))
+
+         if(apiCall) {
+            await axios(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => {
+               if (data.name) {
+                  setCharacters((oldChars) => [...oldChars, data]);
+               } else {
+                  window.alert('¡No hay personajes con este ID!');
+               }
+            })
+         }
+         else alert(`El personaje con ID: ${id} ya esta agregado...`)
+         
+      } catch (error) {
+         window.alert('¡No hay personajes con este ID!')
       }
-      else alert(`El personaje con ID: ${id} ya esta agregado...`)
    }
 
    const onClose = (id) => {
